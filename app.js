@@ -23,9 +23,18 @@ worker.onmessage = (evt) => {
     btn.disabled = false;
   } else if (type === 'token') {
     if (!curEl) {
+      const row = document.createElement('div');
+      row.className = 'msg-row assistant-row';
+
+      const av = document.createElement('div');
+      av.className = 'msg-av kaguya-av';
+
       curEl = document.createElement('div');
-      curEl.className = 'msg assistant';
-      chat.appendChild(curEl);
+      curEl.className = 'msg-text assistant';
+
+      row.appendChild(av);
+      row.appendChild(curEl);
+      chat.appendChild(row);
     }
     curEl.textContent += data;
     chat.scrollTop = chat.scrollHeight;
@@ -57,17 +66,26 @@ function send() {
   const check = sanitizeInput(txt);
   if (!check.safe) {
     const errEl = document.createElement('div');
-    errEl.className = 'msg alert';
+    errEl.className = 'alert';
     errEl.textContent = check.reason;
     chat.appendChild(errEl);
     input.value = '';
     return;
   }
 
-  const userEl = document.createElement('div');
-  userEl.className = 'msg user';
-  userEl.textContent = check.text;
-  chat.appendChild(userEl);
+  const row = document.createElement('div');
+  row.className = 'msg-row user-row';
+
+  const av = document.createElement('div');
+  av.className = 'msg-av user-av';
+
+  const txtEl = document.createElement('div');
+  txtEl.className = 'msg-text user';
+  txtEl.textContent = check.text;
+
+  row.appendChild(av);
+  row.appendChild(txtEl);
+  chat.appendChild(row);
 
   msgs.push({ role: 'user', content: check.text });
   input.value = '';
