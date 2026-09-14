@@ -4,8 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kaguya</title>
-  <!-- COOP / COEP polyfill for GitHub Pages -->
+
+  <!-- Polyfill for Cross-Origin Isolation on GitHub Pages -->
   <script src="https://cdn.jsdelivr.net/npm/coi-serviceworker/coi-serviceworker.min.js"></script>
+
+  <!-- Import Map for bare npm module resolution in browser -->
+  <script type="importmap">
+    {
+      "imports": {
+        "@mlc-ai/web-llm": "https://esm.run/@mlc-ai/web-llm"
+      }
+    }
+  </script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
