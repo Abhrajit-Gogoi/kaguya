@@ -16,18 +16,67 @@ body {
 
 #app {
   width: 100%;
-  max-width: 800px;
+  max-width: 1100px;
   height: 90vh;
   display: flex;
-  flex-direction: column;
   background: #1e1e1e;
   border-radius: 8px;
   overflow: hidden;
 }
 
+#sidebar {
+  width: 320px;
+  background: #181818;
+  padding: 16px;
+  border-right: 1px solid #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+#sidebar h2 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+select, textarea, input[type="range"] {
+  background: #252525;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 8px;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.secondary-btn {
+  margin-top: auto;
+  background: #333;
+  color: #ccc;
+}
+
+#main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 #status {
   padding: 10px 16px;
-  background: #2a2a2a;
+  background: #252525;
   font-size: 13px;
   color: #aaa;
   border-bottom: 1px solid #333;
@@ -62,14 +111,21 @@ body {
   color: #e0e0e0;
 }
 
+.system-alert {
+  align-self: center;
+  background: #3f1d1d;
+  color: #f87171;
+  font-size: 12px;
+}
+
 #input-bar {
   display: flex;
   padding: 12px;
-  background: #2a2a2a;
+  background: #252525;
   gap: 8px;
 }
 
-input {
+input[type="text"] {
   flex: 1;
   padding: 10px;
   border-radius: 6px;
