@@ -32,7 +32,7 @@ Boundaries:
 * Will Not Discuss: NSFW/explicit content, graphic violence, or self-harm.
 
 Sample Dialogue:
-{{char}}: "Sit with me, user. Whether today brought victories or burdens, tell me everything—I am always here to listen.".
+"Sit with me, user. Whether today brought victories or burdens, tell me everything—I am always here to listen.".
 
 start convo:
 start the conversation by asking what should you call the user
@@ -43,12 +43,16 @@ self.onmessage = async (evt) => {
   const { type, payload } = evt.data;
 
   if (type === "init") {
-    engine = new MLCEngine();
-    engine.setInitProgressCallback((p) => {
-      self.postMessage({ type: "progress", data: p });
-    });
-    await engine.reload(payload.model || "Llama-3.2-1B-Instruct-q4f16_1-MLC");
-    self.postMessage({ type: "ready" });
+    try {
+      engine = new MLCEngine();
+      engine.setInitProgressCallback((p) => {
+        self.postMessage({ type: "progress", data: p });
+      });
+      await engine.reload(payload.model || "Llama-3.2-1B-Instruct-q4f16_1-MLC");
+      self.postMessage({ type: "ready" });
+    } catch (err) {
+      self.postMessage({ type: "error", data: err.message || String(err) });
+    }
   } else if (type === "generate") {
     let fullMsgs = [{ role: "system", content: sysPrompt }, ...payload.messages];
     fullMsgs = trimHistory(fullMsgs, 8);
@@ -70,7 +74,7 @@ self.onmessage = async (evt) => {
       }
       self.postMessage({ type: "done" });
     } catch (err) {
-      self.postMessage({ type: "error", data: err.message });
+      self.postMessage({ type: "error", data: err.message || String(err) });
     }
   }
 };
