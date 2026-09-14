@@ -10,7 +10,7 @@ export function sanitizeInput(txt) {
   ];
   for (const p of patterns) {
     if (p.test(txt)) {
-      return { safe: false, reason: "Message flagged by pre-inference security guardrail." };
+      return { safe: false, reason: "Kaguya looks confused by that request..." };
     }
   }
   return { safe: true, text: txt };
